@@ -2,6 +2,8 @@
 # bump: librabbitmq-version /LIBRABBITMQ_VERSION="(.*)"/ https://github.com/alanxz/rabbitmq-c.git|semver:*
 LIBRABBITMQ_VERSION="0.15.0" 
 
+export ZOPEN_NAME="librabbitmq"
+
 export ZOPEN_STABLE_TAG="v${LIBRABBITMQ_VERSION}"
 export ZOPEN_STABLE_URL="https://github.com/alanxz/rabbitmq-c.git"
 export ZOPEN_STABLE_DEPS="cmake make pkgconfig zoslib openssl"
