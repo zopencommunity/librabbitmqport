@@ -6,23 +6,22 @@ export ZOPEN_NAME="librabbitmq"
 
 export ZOPEN_STABLE_TAG="v${LIBRABBITMQ_VERSION}"
 export ZOPEN_STABLE_URL="https://github.com/alanxz/rabbitmq-c.git"
-export ZOPEN_STABLE_DEPS="cmake make pkgconfig zoslib openssl"
+export ZOPEN_STABLE_DEPS="cmake make pkgconfig zoslib openssl popt"
 
 export ZOPEN_BUILD_LINE="STABLE"
 export ZOPEN_CATEGORIES="library networking"
 
-export ZOPEN_COMP=CLANG
-
 export ZOPEN_CONFIGURE="cmake"
-export ZOPEN_CONFIGURE_OPTS="-B ../build -DBUILD_SHARED_LIBS=ON --install-prefix \"\$ZOPEN_INSTALL_DIR/\" ."
+export ZOPEN_CONFIGURE_OPTS="-B ../build --install-prefix \"\$ZOPEN_INSTALL_DIR/\" ."
 
 export ZOPEN_MAKE="cmake"
 export ZOPEN_MAKE_OPTS="--build ../build --parallel \$ZOPEN_NUM_JOBS --config Release"
 export ZOPEN_MAKE_MINIMAL=Y
 
 export ZOPEN_INSTALL="cmake"
-export ZOPEN_INSTALL_OPTS="--install ../build"
+export ZOPEN_INSTALL_OPTS="--install ../build --config Release"
 
+export ZOPEN_COMP=CLANG
 
 # temporary solution until pkgconfig sets this variable itself
 export PKG_CONFIG_PATH="${ZOPEN_ROOTFS}/usr/local/lib/pkgconfig/:$PKG_CONFIG_PATH"
