@@ -1,0 +1,37 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 72eb6f7..e52245c 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -143,6 +143,7 @@ endif()
+ option(BUILD_SHARED_LIBS "Build rabbitmq-c as a shared library" ON)
+ option(BUILD_STATIC_LIBS "Build rabbitmq-c as a static library" ON)
+ option(INSTALL_STATIC_LIBS "Install rabbitmq-c static library" ON)
++option(INSTALL_SHARED_LIBS "Install rabbitmq-c shared library" ON)
+ 
+ option(BUILD_EXAMPLES "Build Examples" OFF)
+ option(BUILD_TOOLS "Build Tools (requires POPT Library)" OFF)
+@@ -236,7 +237,7 @@ configure_package_config_file(
+     INSTALL_DESTINATION "${RMQ_CMAKE_DIR}")
+ 
+ 
+-if(BUILD_SHARED_LIBS)
++if(BUILD_SHARED_LIBS AND INSTALL_SHARED_LIBS)
+     list(APPEND INSTALL_TARGETS rabbitmq)
+ endif()
+ if(BUILD_STATIC_LIBS AND INSTALL_STATIC_LIBS)
+@@ -274,3 +275,15 @@ if (BUILD_STATIC_LIBS)
+ else ()
+   message(STATUS "Building rabbitmq as a static library - no")
+ endif ()
++
++if (BUILD_SHARED_LIBS AND INSTALL_SHARED_LIBS)
++  message(STATUS "Installing rabbitmq as a shared library - yes")
++else ()
++  message(STATUS "Installing rabbitmq as a shared library - no")
++endif ()
++
++if (BUILD_STATIC_LIBS AND INSTALL_STATIC_LIBS)
++  message(STATUS "Installing rabbitmq as a static library - yes")
++else ()
++  message(STATUS "Installing rabbitmq as a static library - no")
++endif ()

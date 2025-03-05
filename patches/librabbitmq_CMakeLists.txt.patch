@@ -1,0 +1,41 @@
+diff --git a/librabbitmq/CMakeLists.txt b/librabbitmq/CMakeLists.txt
+index c7983ae..65ed963 100644
+--- a/librabbitmq/CMakeLists.txt
++++ b/librabbitmq/CMakeLists.txt
+@@ -101,15 +101,27 @@ if(BUILD_SHARED_LIBS)
+     set_target_properties(rabbitmq PROPERTIES OUTPUT_NAME rabbitmq.${RMQ_SOVERSION})
+   endif()
+ 
+-  install(TARGETS rabbitmq EXPORT "${targets_export_name}"
+-    RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
+-            COMPONENT rabbitmq-c-runtime
+-    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+-            COMPONENT rabbitmq-c-runtime
+-            NAMELINK_COMPONENT rabbitmq-c-development
+-    ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
+-            COMPONENT rabbitmq-c-development
+-  )
++  if(INSTALL_SHARED_LIBS)
++    install(TARGETS rabbitmq EXPORT "${targets_export_name}"
++      RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
++              COMPONENT rabbitmq-c-runtime
++      LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
++              COMPONENT rabbitmq-c-runtime
++              NAMELINK_COMPONENT rabbitmq-c-development
++      ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
++              COMPONENT rabbitmq-c-development
++    )
++
++    # Explizit die .so Datei installieren, falls sie existiert
++    install(CODE "
++      if(EXISTS \"${CMAKE_CURRENT_BINARY_DIR}/librabbitmq.so\")
++        file(INSTALL
++          DESTINATION \"\${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBDIR}\"
++          FILES \"${CMAKE_CURRENT_BINARY_DIR}/librabbitmq.so\"
++        )
++      endif()
++    ")
++  endif()
+ 
+   add_library(rabbitmq::rabbitmq ALIAS rabbitmq)
+ endif()
