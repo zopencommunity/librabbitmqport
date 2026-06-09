@@ -1,6 +1,6 @@
 # Update bump details accordingly. Use bump check to confirm.
 # bump: librabbitmq-version /LIBRABBITMQ_VERSION="(.*)"/ https://github.com/alanxz/rabbitmq-c.git|semver:*
-LIBRABBITMQ_VERSION="0.15.0" 
+LIBRABBITMQ_VERSION="0.16.0" 
 
 export ZOPEN_NAME="librabbitmq"
 
